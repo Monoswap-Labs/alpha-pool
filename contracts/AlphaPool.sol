@@ -137,7 +137,7 @@ contract AlphaPool is IAlphaPool, Multicall, AccessControl{
             key.endTime - key.startTime <= maxIncentiveDuration,
             'AlphaPool::createIncentive: incentive duration is too long'
         );
-
+        IUniswapV3Pool(key.pool).slot0(); // ensure pool exists
         bytes32 incentiveId = IncentiveId.compute(key);
         incentiveKeys[incentiveId] = key;
 
