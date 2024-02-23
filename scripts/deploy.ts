@@ -10,22 +10,26 @@ async function main() {
   const maxIncentiveStartLeadTime = 30 * 86400;
   const maxIncentiveDuration = 365 * 86400;
 
-  const alphaPool = await ethers.deployContract('AlphaPool', [
-    v3Factory,
-    nonfungiblePositionManager,
-    maxIncentiveStartLeadTime,
-    maxIncentiveDuration,
-  ]);
-  console.log(
-    `UniswapV3Staker deployed ${await alphaPool.getAddress()} "${v3Factory}" "${nonfungiblePositionManager}" "${maxIncentiveStartLeadTime}" "${maxIncentiveDuration}"`
+  // const alphaPool = await ethers.deployContract('AlphaPool', [
+  //   v3Factory,
+  //   nonfungiblePositionManager,
+  //   maxIncentiveStartLeadTime,
+  //   maxIncentiveDuration,
+  // ]);
+  const alphaPool = await ethers.getContractAt(
+    'AlphaPool',
+    '0x0E1648D4dD7Ebac7ceA38Fae3af2c64977439bBa'
   );
-  // const tMono = await ethers.getContractAt(
-  //   'TestERC20',
-  //   '0xa07aC8cDe2a98B189477b8e41F0c2Ea6CdDbC055'
-  // );
-  const tMono = await ethers.deployContract('TestERC20', [
-    ethers.parseEther('10000000000'),
-  ]);
+  console.log(
+    `alphaPool deployed ${await alphaPool.getAddress()} "${v3Factory}" "${nonfungiblePositionManager}" "${maxIncentiveStartLeadTime}" "${maxIncentiveDuration}"`
+  );
+  const tMono = await ethers.getContractAt(
+    'TestERC20',
+    '0xa07aC8cDe2a98B189477b8e41F0c2Ea6CdDbC055'
+  );
+  // const tMono = await ethers.deployContract('TestERC20', [
+  //   ethers.parseEther('10000000000'),
+  // ]);
   const poolAddress = '0xC382B3DE9d67070fff2b9635d3A67Ef1b7f04c3e';
   const poolFee = 3000;
   const startTime = Math.floor(Date.now() / 1000) + 60;
@@ -50,7 +54,7 @@ async function main() {
       endTime: endTime,
       refundee: deployer.address,
     },
-    ethers.parseEther('1000')
+    ethers.parseEther('10000')
   );
 }
 
