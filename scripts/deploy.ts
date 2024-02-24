@@ -10,16 +10,16 @@ async function main() {
   const maxIncentiveStartLeadTime = 30 * 86400;
   const maxIncentiveDuration = 365 * 86400;
 
-  // const alphaPool = await ethers.deployContract('AlphaPool', [
-  //   v3Factory,
-  //   nonfungiblePositionManager,
-  //   maxIncentiveStartLeadTime,
-  //   maxIncentiveDuration,
-  // ]);
-  const alphaPool = await ethers.getContractAt(
-    'AlphaPool',
-    '0x0E1648D4dD7Ebac7ceA38Fae3af2c64977439bBa'
-  );
+  const alphaPool = await ethers.deployContract('AlphaPool', [
+    v3Factory,
+    nonfungiblePositionManager,
+    maxIncentiveStartLeadTime,
+    maxIncentiveDuration,
+  ]);
+  // const alphaPool = await ethers.getContractAt(
+  //   'AlphaPool',
+  //   '0x0E1648D4dD7Ebac7ceA38Fae3af2c64977439bBa'
+  // );
   console.log(
     `alphaPool deployed ${await alphaPool.getAddress()} "${v3Factory}" "${nonfungiblePositionManager}" "${maxIncentiveStartLeadTime}" "${maxIncentiveDuration}"`
   );
